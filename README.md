@@ -1,59 +1,64 @@
-# Eclipse 404 — NY 2027
+# Eclipse 404 - NY 2027
 
-This editable Vercel project now closely matches the original public design at `https://eclipse404-ny2027.rahmansharmin.chatgpt.site/`. The original page's deployed stylesheet, hero artwork, and fireworks audio were recovered from its public assets. This is still a reconstruction, not an export of the original ChatGPT project or its private backend source.
+This editable Vercel project closely matches the original public design at
+https://eclipse404-ny2027.rahmansharmin.chatgpt.site/. Its deployed stylesheet,
+hero artwork, and fireworks audio were recovered from public assets. This is a
+reconstruction, not an export of the original ChatGPT project or its private
+backend source.
 
 ## Features
-- Original black-and-cyan design, event artwork, content, and responsive layout
-- Mobile friendly, no external front-end dependencies
-- Fireworks visual and the original fireworks audio, enabled only after a visitor interaction
-- Guest registration: name, phone, email, Facebook, Instagram; consent required
-- Server-side validation; submission is **not** considered successful without a confirmed response from Google Apps Script
-- Google Sheets Apps Script integration via a Vercel serverless function
-- Configurable Messenger and WhatsApp chat options
+
+- Original black-and-cyan design, artwork, content, and responsive layout
+- Fireworks visual and original fireworks audio, started by visitor interaction
+- Registration form for name, phone, email, Facebook, Instagram, and consent
+- Server-side validation through a Vercel function
+- Google Sheets Apps Script integration
+- Optional Messenger and WhatsApp chat links
 
 ## Deploy to Vercel
-1. Create a GitHub repository and upload **this folder's files**, preserving `api/register.js`.
-2. Sign in to https://vercel.com and choose **Add New → Project → Import Git Repository**. Pick your repository.
-3. Framework preset: **Other**. Root directory: folder containing `index.html`. Leave build command empty.
-4. Deploy. Vercel will assign a `*.vercel.app` preview URL.
-5. Complete Google Sheets steps below and set environment variables, then redeploy.
-6. For chat, edit `config.js` with your public Facebook Page username and WhatsApp business number and push the change.
 
-Alternative terminal deployment with Vercel CLI (after signing in to your Vercel account):
-```bash
-npm i -g vercel
-vercel login
-vercel --prod
-```
+1. Import this repository into Vercel.
+2. Select the folder containing `index.html` and `vercel.json` as the project root.
+3. Use the "Other" framework preset and leave the build command empty.
+4. Configure the Google Sheets integration below and redeploy.
+5. Optionally set the public contact values in `config.js`.
 
 ## Connect Google Sheets
-1. Create or open a Google Sheet that will collect event guest applications.
-2. In the Sheet, open **Extensions → Apps Script**.
+
+1. Create or open a Google Sheet for event applications.
+2. In the Sheet, choose Extensions > Apps Script.
 3. Replace its starter code with `google-apps-script/Code.gs`.
-4. Open **Project Settings → Script properties**; add `SCRIPT_SECRET` set to a long random string. Do not share it or place it in any browser JS.
-5. Use **Deploy → New deployment → Web app**; execute as **Me** and allow access to **Anyone** (necessary for anonymous server-to-server POST via this method). Approve Google's authorization prompts.
-6. Copy the Web App `/exec` URL.
-7. In Vercel project **Settings → Environment Variables**, create `REGISTRATION_HOOK_URL` = that URL, and `REGISTRATION_SECRET` = the same value as `SCRIPT_SECRET`.
-8. Redeploy your site. Send a test application and verify a row appears on the `Registrations` worksheet. Then delete that test row.
+4. In Project Settings > Script properties, add `SCRIPT_SECRET` with a long random value. Do not put this secret in browser JavaScript or commit it to Git.
+5. Deploy the script as a web app, execute as yourself, and allow access to anyone. Approve Google's authorization prompts.
+6. Copy the web app URL ending in `/exec`.
+7. In Vercel project settings, set `REGISTRATION_HOOK_URL` to that URL and `REGISTRATION_SECRET` to the same value as `SCRIPT_SECRET`.
+8. Redeploy and submit a test application. Verify it appears in the `Registrations` sheet, then remove the test row.
 
-**Privacy:** This form collects real personal and social account information. Ensure you publish an appropriate privacy notice/retention policy and limit access to the destination Google Sheet. Anyone with a valid form can submit; for production campaigns with high traffic, add CAPTCHA/Turnstile and rate limiting before sharing publicly. Consent in the page is event-contact consent, not permission to use information for marketing outside the event.
+## Privacy
 
-## Customizations
-- Update hero text/date when event schedule and approved details are finalized. No exact event date or venue has been invented.
-- In `config.js`, set `messengerUsername` and `whatsappNumber`. The widget explains that chat is pending when these values aren't set.
-- The original frontend artwork and audio are stored in `assets/`; no secrets belong there.
+The form collects personal and social profile information. Publish an appropriate
+privacy and retention notice, limit access to the destination Sheet, and consider
+adding CAPTCHA or rate limiting before sharing the site publicly.
+
+## Customization
+
+- Update event copy only when the schedule and approved details are finalized.
+- In `config.js`, set `messengerUsername` and `whatsappNumber` to configure the chat links.
+- The original frontend artwork and audio are in `assets/`. Do not store secrets there.
 
 ## Local preview
-With Node 20+, use `npx vercel dev` after project linking to run API functions. Alternatively `python -m http.server 8000` previews the frontend only (the registration endpoint won't exist).
+
+With Node.js 20 or later, run `npx vercel dev` to preview both the site and API.
+A static server such as `python -m http.server 8000` previews only the frontend.
 
 ## Files
-- `index.html` — content and form
-- `styles-original.css` — recovered responsive stylesheet from the original public design
-- `styles.css` — local asset path overrides
-- `script.js` — interactions, fireworks, client validation, form submission
-- `assets/eclipse-ny2027.png` and `assets/fireworks-once.wav` — original public design assets
-- `config.js` — public chat destinations
-- `api/register.js` — serverless Google Sheets proxy (Vercel)
-- `google-apps-script/Code.gs` — Google Sheets form receiver
-- `vercel.json` — Vercel configuration
-- `.env.example` — required private environment variables
+
+- `index.html` - page structure, content, and registration form
+- `styles-original.css` - recovered stylesheet from the original public design
+- `styles.css` - local asset path overrides
+- `script.js` - interactions, fireworks, validation, and form submission
+- `assets/eclipse-ny2027.png` and `assets/fireworks-once.wav` - original public design assets
+- `api/register.js` - Vercel registration endpoint
+- `google-apps-script/Code.gs` - Google Sheets receiver
+- `config.js` - public contact destinations
+- `.env.example` - names of the private environment variables required by the API
