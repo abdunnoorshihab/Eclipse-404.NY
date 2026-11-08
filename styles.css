@@ -123,15 +123,15 @@ nav.is-scrolled {
 
   .eventArtwork {
     position: absolute;
-    width: 100%;
     top: 155px;
-    right: -12%;
+    right: 0;
     bottom: 0;
-    left: auto;
+    left: 0;
+    width: auto;
     margin-left: 0;
     opacity: .48;
     aspect-ratio: auto;
-    background-position: center right;
+    background-position: center center;
     background-size: auto 88%;
   }
 
