@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#050509" />
+  <meta name="description" content="ECLIPSE 404 — an exclusive New Year celebration for a curated guest list. Request your invitation to NY 2027." />
+  <title>Eclipse 404 — NY 2027</title>
+  <link rel="stylesheet" href="styles-original.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="config.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main>
+    <audio id="fireworksAudio" src="assets/fireworks-once.wav" preload="none"></audio>
+    <canvas id="sky" class="fireworksCanvas" aria-hidden="true"></canvas>
+
+    <nav aria-label="Main navigation">
+      <a class="brand" href="#" aria-label="Eclipse 404 home">ECLIPSE<span>404</span></a>
+      <span class="edition">NY / 2027 EDITION</span>
+      <a class="navlink" href="#apply">REQUEST ACCESS ↗</a>
+    </nav>
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="eventArtwork" role="img" aria-label="Eclipse 404 New Year artwork: cyan fireworks above a celebrating crowd. Where? Let’s make it unforgettable."></div>
+      <div class="heroContent">
+        <p class="eyebrow"><i aria-hidden="true"></i> AN EXCLUSIVE NEW YEAR CELEBRATION</p>
+        <h1 id="hero-title">YOU HAD<br><span>TO BE THERE.</span></h1>
+        <p class="intro">Some nights become stories.<br>Start 2027 inside the story.</p>
+        <a class="button" href="#apply">REQUEST YOUR INVITE <span aria-hidden="true">↗</span></a>
+        <p class="micro">A CURATED GUEST LIST. AN INVITATION WORTH WAITING FOR.</p>
+      </div>
+      <div class="heroBottom"><span>01 — A NEW YEAR, OFF THE GRID</span><span>SCROLL TO ENTER ↓</span></div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <span>ECLIPSE 404</span><b>✳</b><span>EXCLUSIVE CELEBRATION NY 2027</span><b>✳</b><span>SELECTED PEOPLE ONLY</span><b>✳</b><span>ECLIPSE 404</span>
+    </div>
+
+    <section class="fomo" aria-labelledby="fomo-title">
+      <p class="eyebrow">EXCLUSIVE CELEBRATION / NY 2027</p>
+      <h2 id="fomo-title">BE THE STORY.<br><em>NOT THE REPLY.</em></h2>
+      <div class="fomoDetail">
+        <p>For the people who bring the energy.<br>For the moments that make the group chat.</p>
+        <a href="#apply">PUT MY NAME FORWARD ↗</a>
+        <span>Selected people only · Applications reviewed individually</span>
+      </div>
+    </section>
+
+    <section id="apply" class="application" aria-labelledby="application-title">
+      <aside>
+        <p class="eyebrow">THE GUEST LIST IS THE DIFFERENCE</p>
+        <h2 id="application-title">THE NIGHT.<br>THE PEOPLE.<br><em>YOUR INVITE.</em></h2>
+        <p>You can watch the stories the next morning. Or you can be in them. Eclipse 404 brings a selected circle together for an exclusive NY 2027 celebration. Your first move? Get on our radar.</p>
+        <div class="steps">
+          <p><span>01</span>Send your application</p>
+          <p><span>02</span>Our team reviews your profile</p>
+          <p><span>03</span>Selected guests receive an invitation</p>
+        </div>
+        <p class="note">Venue and event details will be shared with selected guests. An application is not a confirmed invitation.</p>
+        <a class="social" href="https://www.facebook.com/share/1DUUH8rGPQ" target="_blank" rel="noopener noreferrer">FOLLOW ECLIPSE 404 ↗</a>
+      </aside>
+
+      <div class="formCard">
+        <div class="formTop"><span>GUEST LIST APPLICATION</span><span>NY 27 ↗</span></div>
+        <h3>Your name belongs here.</h3>
+        <p class="muted">All fields are required.</p>
+        <form id="registrationForm" novalidate>
+          <label for="fullName">Full name
+            <input id="fullName" name="name" type="text" autocomplete="name" minlength="2" maxlength="120" placeholder="Your name" required />
+          </label>
+          <div class="row">
+            <label for="phone">Phone number
+              <input id="phone" name="phone" type="tel" autocomplete="tel" minlength="7" maxlength="32" placeholder="+880 1XXXXXXXXX" required />
+            </label>
+            <label for="email">Email address
+              <input id="email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@email.com" required />
+            </label>
+          </div>
+          <label for="facebook">Facebook profile
+            <input id="facebook" name="facebook" type="url" inputmode="url" maxlength="500" placeholder="https://facebook.com/yourprofile" required />
+          </label>
+          <label for="instagram">Instagram profile
+            <input id="instagram" name="instagram" type="text" maxlength="500" placeholder="https://instagram.com/yourprofile or @username" required />
+          </label>
+          <div class="trap" aria-hidden="true">
+            <label for="website">Website</label>
+            <input id="website" name="website" autocomplete="off" tabindex="-1" />
+          </div>
+          <label class="consent" for="consent">
+            <input id="consent" name="consent" type="checkbox" required />
+            <span>I agree that Eclipse 404 may use my details to review my application and contact me about this event.</span>
+          </label>
+          <button class="button" type="submit"><span class="submit-label">REQUEST MY INVITATION</span><span aria-hidden="true">↗</span></button>
+          <p id="formStatus" class="message" role="status" aria-live="polite"></p>
+          <p class="privacy">Your contact details and profiles are shared only with the event team for guest selection. No guest list is displayed publicly.</p>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <span class="brand">ECLIPSE<span>404</span></span>
+      <span>404: ORDINARY NIGHTS NOT FOUND.</span>
+      <span>NY 2027 EDITION · © <span id="year">2026</span></span>
+    </footer>
+  </main>
+
+  <button id="soundToggle" class="soundToggle" type="button" aria-pressed="false">
+    <span aria-hidden="true">♪</span><span class="sound-label">PLAY FIREWORKS SOUND</span>
+  </button>
+
+  <div class="chatWidget">
+    <div id="chatMenu" class="chatPanel" hidden>
+      <div class="chatHeading"><strong>CONTACT ECLIPSE 404</strong><button id="chatClose" type="button" aria-label="Close chat options">×</button></div>
+      <h3>Let’s talk.</h3>
+      <p id="chatDescription">For invitation questions, connect with the event team.</p>
+      <a id="messengerLink" class="chatChannel" target="_blank" rel="noopener noreferrer" hidden><span>CHAT ON MESSENGER ↗</span></a>
+      <a id="whatsappLink" class="chatChannel" target="_blank" rel="noopener noreferrer" hidden><span>CHAT ON WHATSAPP ↗</span></a>
+      <p class="chatNote">Application review is handled privately by the event team.</p>
+    </div>
+    <button id="chatToggle" class="chatToggle" type="button" aria-expanded="false" aria-controls="chatMenu" aria-label="Open chat options">◌<span>LET’S CHAT</span></button>
+  </div>
+</body>
+</html>

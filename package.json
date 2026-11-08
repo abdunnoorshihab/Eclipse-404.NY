@@ -1,0 +1,11 @@
+{
+  "name": "eclipse404-ny2027",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Eclipse 404 NY 2027 invitation-only event microsite — Vercel-ready reconstruction",
+  "scripts": {
+    "dev": "npx vercel dev",
+    "test": "node --test tests/*.test.js"
+  },
+  "engines": { "node": ">=20" }
+}
