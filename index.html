@@ -13,7 +13,7 @@
 </head>
 <body>
   <main>
-    <audio id="fireworksAudio" src="assets/fireworks-once.wav" preload="none"></audio>
+    <audio id="fireworksAudio" src="assets/fireworks-once.wav" preload="auto"></audio>
     <canvas id="sky" class="fireworksCanvas" aria-hidden="true"></canvas>
 
     <nav aria-label="Main navigation">
@@ -105,10 +105,6 @@
       <span>NY 2027 EDITION · © <span id="year">2026</span></span>
     </footer>
   </main>
-
-  <button id="soundToggle" class="soundToggle" type="button" aria-pressed="false">
-    <span aria-hidden="true">♪</span><span class="sound-label">PLAY FIREWORKS SOUND</span>
-  </button>
 
   <div class="chatWidget">
     <div id="chatMenu" class="chatPanel" hidden>

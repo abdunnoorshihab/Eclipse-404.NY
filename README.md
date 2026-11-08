@@ -9,7 +9,7 @@ backend source.
 ## Features
 
 - Original black-and-cyan design, artwork, content, and responsive layout
-- Fireworks visual and original fireworks audio, started by visitor interaction
+- Fireworks visual and original fireworks audio, attempted automatically on entry
 - Registration form for name, phone, email, Facebook, Instagram, and consent
 - Server-side validation through a Vercel function
 - Google Sheets Apps Script integration
@@ -22,6 +22,10 @@ backend source.
 3. Use the "Other" framework preset and leave the build command empty.
 4. Configure the Google Sheets integration below and redeploy.
 5. Optionally set the public contact values in `config.js`.
+
+The page attempts to play the fireworks audio on entry. Some browsers block
+audible autoplay; when that happens, playback starts on the visitor's first tap
+or key press without an extra sound button.
 
 ## Connect Google Sheets
 

@@ -8,14 +8,20 @@
   const sky = $('#sky');
   const ctx = sky.getContext('2d');
   const audio = $('#fireworksAudio');
-  const soundToggle = $('#soundToggle');
-  const soundLabel = $('.sound-label');
+  const nav = $('nav');
   const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let fireworks = [];
   let animationId = null;
   let stopAt = 0;
+  let audioStarted = false;
 
   $('#year').textContent = String(new Date().getFullYear());
+
+  function updateNavState() {
+    nav.classList.toggle('is-scrolled', window.scrollY > 12);
+  }
+  updateNavState();
+  window.addEventListener('scroll', updateNavState, { passive: true });
 
   function resizeCanvas() {
     const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
@@ -90,34 +96,29 @@
     if (!animationId) animationId = requestAnimationFrame(fireworksFrame);
   }
 
-  function setSoundState(isPlaying) {
-    soundToggle.setAttribute('aria-pressed', String(isPlaying));
-    soundLabel.textContent = isPlaying ? 'SOUND PLAYING' : 'PLAY FIREWORKS SOUND';
+  function removeAudioRetryListeners() {
+    document.removeEventListener('pointerdown', startAudio);
+    document.removeEventListener('keydown', startAudio);
   }
 
-  soundToggle.addEventListener('click', async () => {
-    if (!audio.paused) {
-      audio.pause();
-      audio.currentTime = 0;
-      setSoundState(false);
-      return;
-    }
+  async function startAudio() {
+    if (audioStarted) return;
     try {
-      audio.currentTime = 0;
       await audio.play();
-      setSoundState(true);
-      showFireworks();
+      audioStarted = true;
+      removeAudioRetryListeners();
     } catch (error) {
-      if (error.name === 'AbortError') {
-        setSoundState(!audio.paused);
-        return;
+      if (error.name === 'NotAllowedError') {
+        document.addEventListener('pointerdown', startAudio, { passive: true });
+        document.addEventListener('keydown', startAudio);
+      } else if (error.name !== 'AbortError') {
+        console.warn('Fireworks audio could not be played:', error);
       }
-      console.warn('Fireworks audio could not be played:', error);
-      soundLabel.textContent = 'SOUND UNAVAILABLE';
     }
-  });
-  audio.addEventListener('ended', () => setSoundState(false));
-  audio.addEventListener('pause', () => setSoundState(false));
+  }
+
+  showFireworks();
+  startAudio();
 
   function validateProfile(field, value) {
     try {

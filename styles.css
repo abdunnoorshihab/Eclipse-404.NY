@@ -1,2 +1,220 @@
 .eventArtwork{background-image:url("assets/eclipse-ny2027.png")}
 .fireworksCanvas{z-index:5}
+
+html {
+  scroll-padding-top: 110px;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  width: 100%;
+  margin: 0;
+  padding-inline: 5%;
+  background: rgb(5 5 9 / 88%);
+  border-bottom-color: transparent;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: background-color .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+nav.is-scrolled {
+  background: rgb(5 5 9 / 94%);
+  border-bottom-color: rgb(0 229 255 / 20%);
+  box-shadow: 0 8px 28px rgb(0 0 0 / 24%);
+}
+
+.navlink {
+  position: relative;
+  transition: color .2s ease, border-color .2s ease;
+}
+
+.navlink::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 1px;
+  background: var(--cyan);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .25s ease;
+}
+
+.button,
+.formCard,
+.chatToggle,
+.chatChannel {
+  transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.formCard {
+  box-shadow: 0 22px 70px rgb(0 0 0 / 18%);
+}
+
+.formCard:focus-within {
+  border-color: rgb(0 229 255 / 55%);
+  box-shadow: 0 22px 70px rgb(0 0 0 / 24%), 0 0 32px rgb(0 229 255 / 7%);
+}
+
+:where(a, button, input):focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 4px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  nav .brand:hover {
+    color: var(--cyan);
+  }
+
+  .navlink:hover::after,
+  .navlink:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .button:hover:not(:disabled) {
+    box-shadow: 0 10px 28px rgb(0 229 255 / 20%);
+    transform: translateY(-2px);
+  }
+
+  .formCard:hover {
+    border-color: rgb(0 229 255 / 32%);
+  }
+
+  .chatToggle:hover,
+  .chatChannel:hover {
+    box-shadow: 0 8px 28px rgb(0 229 255 / 16%);
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 900px) {
+  nav {
+    height: 72px;
+    padding-inline: 6%;
+  }
+
+  .brand {
+    font-size: 19px;
+  }
+
+  .navlink {
+    font-size: 8px;
+  }
+
+  .hero {
+    display: block;
+    min-height: 740px;
+    padding: 100px 6% 100px;
+  }
+
+  .heroContent {
+    max-width: 100%;
+    padding-top: 0;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+    font-size: clamp(52px, 12.5vw, 88px);
+  }
+
+  .eventArtwork {
+    position: absolute;
+    width: 100%;
+    top: 155px;
+    right: -12%;
+    bottom: 0;
+    left: auto;
+    margin-left: 0;
+    opacity: .48;
+    aspect-ratio: auto;
+    background-position: center right;
+    background-size: auto 88%;
+  }
+
+  .eventArtwork:after {
+    background: linear-gradient(180deg, #03080b 0%, #03080b33 38%, #03080b 100%);
+  }
+
+  .heroBottom {
+    left: 6%;
+    right: 6%;
+  }
+
+  .fomo {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 58px 6%;
+  }
+
+  .fomo h2,
+  .application h2 {
+    font-size: clamp(48px, 11vw, 72px);
+  }
+
+  .application {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 38px;
+    padding: 62px 6%;
+  }
+
+  .formCard {
+    min-width: 0;
+    padding: clamp(20px, 5vw, 30px);
+  }
+
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .chatWidget {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .chatToggle {
+    padding: 11px 14px;
+  }
+
+  footer {
+    flex-wrap: wrap;
+    gap: 14px 20px;
+  }
+}
+
+@media (max-width: 380px) {
+  .navlink {
+    letter-spacing: 1px;
+  }
+
+  .hero h1 {
+    font-size: clamp(46px, 12vw, 52px);
+  }
+
+  .hero .micro {
+    max-width: 240px;
+  }
+
+  .chatToggle span {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  nav,
+  .navlink,
+  .navlink::after,
+  .button,
+  .formCard,
+  .chatToggle,
+  .chatChannel {
+    transition-duration: .01ms;
+  }
+}
