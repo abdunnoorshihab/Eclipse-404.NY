@@ -1,5 +1,19 @@
-.eventArtwork{background-image:url("assets/eclipse-ny2027.png")}
 .fireworksCanvas{z-index:5}
+
+body {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgb(5 5 9 / 70%), rgb(5 5 9 / 80%)),
+    url("assets/eclipse-ny2027.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.hero {
+  background: transparent;
+}
 
 html {
   scroll-padding-top: 110px;
@@ -119,24 +133,6 @@ nav.is-scrolled {
   .hero h1 {
     max-width: 100%;
     font-size: clamp(52px, 12.5vw, 88px);
-  }
-
-  .eventArtwork {
-    position: absolute;
-    top: 155px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: auto;
-    margin-left: 0;
-    opacity: .48;
-    aspect-ratio: auto;
-    background-position: center center;
-    background-size: auto 88%;
-  }
-
-  .eventArtwork:after {
-    background: linear-gradient(180deg, #03080b 0%, #03080b33 38%, #03080b 100%);
   }
 
   .heroBottom {
