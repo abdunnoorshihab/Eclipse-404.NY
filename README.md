@@ -9,7 +9,7 @@ backend source.
 ## Features
 
 - Original black-and-cyan design, artwork, content, and responsive layout
-- Full-bleed fixed event poster background, with the original single-page section layout preserved
+- Full-bleed event poster background in the hero, with the original single-page section layout preserved
 - Fireworks visual and original fireworks audio, attempted automatically on entry
 - Registration form for name, phone, email, Facebook, Instagram, and consent
 - Server-side validation through a Vercel function
