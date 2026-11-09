@@ -23,9 +23,12 @@ backend source.
 4. Configure the Google Sheets integration below and redeploy.
 5. Optionally set the public contact values in `config.js`.
 
-The page attempts to play the fireworks audio on entry. Some browsers block
-audible autoplay; when that happens, playback starts on the visitor's first tap
-or key press without an extra sound button.
+The fireworks audio is preloaded, and the opening visual burst starts when audio
+playback begins. If audio is still loading after a short wait, the visual effect
+starts rather than holding up the page. Some browsers block audible autoplay;
+when that happens, playback starts on the visitor's first tap or key press
+without an extra sound button. Fireworks are rate-limited to keep animation
+smooth across display refresh rates.
 
 ## Connect Google Sheets
 

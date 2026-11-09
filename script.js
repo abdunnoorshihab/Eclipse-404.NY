@@ -13,7 +13,12 @@
   let fireworks = [];
   let animationId = null;
   let stopAt = 0;
+  let nextFireworkAt = 0;
+  let initialExperienceStarted = false;
   let audioStarted = false;
+  let initialFireworksTimer = null;
+
+  const maxParticles = 260;
 
   $('#year').textContent = String(new Date().getFullYear());
 
@@ -35,8 +40,9 @@
   function launchFirework(x, y) {
     const shades = [174, 186, 202, 275, 46, 342];
     const hue = shades[Math.floor(Math.random() * shades.length)];
-    for (let i = 0; i < 65; i++) {
-      const angle = Math.PI * 2 * i / 65;
+    const particleCount = Math.min(46, maxParticles - fireworks.length);
+    for (let i = 0; i < particleCount; i++) {
+      const angle = Math.PI * 2 * i / particleCount;
       const speed = 1.1 + Math.random() * 4;
       fireworks.push({
         x,
@@ -53,11 +59,12 @@
 
   function fireworksFrame(time) {
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    if (Math.random() < .16 && time < stopAt - 550) {
+    if (time >= nextFireworkAt && time < stopAt - 550 && fireworks.length < maxParticles) {
       launchFirework(
         window.innerWidth * (.15 + Math.random() * .7),
         window.innerHeight * (.08 + Math.random() * .55)
       );
+      nextFireworkAt = time + 420 + Math.random() * 260;
     }
     fireworks.forEach((particle) => {
       particle.x += particle.vx;
@@ -87,6 +94,7 @@
   function showFireworks() {
     if (prefersReducedMotion || !ctx) return;
     stopAt = performance.now() + 6100;
+    nextFireworkAt = performance.now() + 420;
     for (let i = 0; i < 3; i++) {
       launchFirework(
         window.innerWidth * (.25 + Math.random() * .55),
@@ -107,6 +115,14 @@
       await audio.play();
       audioStarted = true;
       removeAudioRetryListeners();
+      if (initialFireworksTimer) {
+        clearTimeout(initialFireworksTimer);
+        initialFireworksTimer = null;
+      }
+      if (!initialExperienceStarted) {
+        initialExperienceStarted = true;
+        showFireworks();
+      }
     } catch (error) {
       if (error.name === 'NotAllowedError') {
         document.addEventListener('pointerdown', startAudio, { passive: true });
@@ -114,10 +130,19 @@
       } else if (error.name !== 'AbortError') {
         console.warn('Fireworks audio could not be played:', error);
       }
+      if (!initialExperienceStarted) {
+        initialExperienceStarted = true;
+        showFireworks();
+      }
     }
   }
 
-  showFireworks();
+  initialFireworksTimer = setTimeout(() => {
+    if (!initialExperienceStarted) {
+      initialExperienceStarted = true;
+      showFireworks();
+    }
+  }, 1000);
   startAudio();
 
   function validateProfile(field, value) {
